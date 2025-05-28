@@ -29,9 +29,9 @@ const handleAddMoneyToWallet = async (req, res) => {
 
 
 const handleGetWalletBalance = async (req, res)=>{
-     const userEmail = req.userEmail
-
-    const userWallet = await Wallet.findOne({ userEmail: userEmail })
+     try{ const user = req.user
+     
+    const userWallet = await Wallet.findOne({ userId: user })
 
     if(!userWallet){
         return res.status(404).json({message: "Wallet not found."})
@@ -41,7 +41,9 @@ const handleGetWalletBalance = async (req, res)=>{
         message: "Success",
         id: userWallet?.id,
         balance: userWallet?.balance 
-    }) }
+
+    }) 
+    } catch (error){ res.status(500).json({ error: error.message }) } } 
 
 
 
