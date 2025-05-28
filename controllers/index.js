@@ -98,6 +98,7 @@ const handleUserLogin = async (req, res)=>{
         accessToken,
         user: {
             email: user?.email,
+             id: user?.id,
             username: user?.username,
             role: user?.role
         },
